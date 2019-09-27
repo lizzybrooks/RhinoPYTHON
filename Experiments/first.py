@@ -24,9 +24,11 @@ for p in range(len(points)):
     if points[p][0]<0:
         rs.RotateObject(a, (points[p][0],points[p][1],0), 180, None, copy=False)
 
+   
+
 #one cool prompt:If the center of a circle is inside the previous circle, make a new circle of random size
 #overlapping circles will make a nice sticker!
 
 #OR, instead of a curve coming out of the edge of the circle, do a triangle. Then a line, then a diamond, then another circle... That is your mandala.
 
-# you need to figure out how to automate the points on the edge of the circle, though. 
+# you need to figure out how to automate the points on the edge of the circle, though.
