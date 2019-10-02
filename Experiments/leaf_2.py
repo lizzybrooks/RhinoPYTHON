@@ -2,8 +2,13 @@ import rhinoscriptsyntax as rs
 import random
 
 
-def LEAF (startX,startY, width):
-    rotationAngle = random.uniform(40,140)
+def LEAF (startX,startY, width, left):
+    if (left == True):
+        rotationAngle = random.uniform(40,140)
+    elif(left == False):
+        rotationAngle = random.uniform(200,300)
+
+
     halfLeaf = rs.AddArc3Pt((startX,startY,0),(startX,startY+12,0),(startX+width,startY+4,0))
     secondHalf = rs.MirrorObject(halfLeaf,(startX,startY,0),(startX,startY+12,0),copy=True)
 
@@ -23,7 +28,7 @@ def LEAF (startX,startY, width):
             vein = rs.AddCurve(points)
             rs.RotateObject(vein, (startX,startY,0),rotationAngle,axis=None, copy=False)
             widthFixer = widthFixer - 1
-            print(widthFixer)
+            # print(widthFixer)
         elif(points == 7):
             widthFixer = .2
             points = (startX-width + widthFixer, startY+points + random.uniform(-.5,.5),0),veinPoint, (startX+width-widthFixer, startY+points + random.uniform(-.5,.5),0)
@@ -35,7 +40,7 @@ def LEAF (startX,startY, width):
             points = (startX-width + widthFixer, startY+points + random.uniform(-.5,.5),0),veinPoint, (startX+width-widthFixer, startY+points + random.uniform(-.5,.5),0)
             vein = rs.AddCurve(points)
             rs.RotateObject(vein, (startX,startY,0),rotationAngle,axis=None, copy=False)
-            print(widthFixer)
+            # print(widthFixer)
 
     middleVein = rs.AddInterpCurve(veinPoints)
     rs.RotateObject(middleVein, (startX,startY,0),rotationAngle,axis=None, copy=False)
@@ -52,12 +57,16 @@ def branch (startX,startY):
 
 
     curvybranch =  rs.AddInterpCurve(branchPoints)
+    print(yValue)
+    for leaves in range (0,10,1):
+        LEAF(startX,yValue[leaves],random.uniform(2,4),True)
+        LEAF(startX,yValue[leaves],random.uniform(2,4),False)
 
-    for leaves in range (0,len(branchPoints)):
-        LEAF(0,yValue[leaves],random.uniform(2,4))
+
 
 branch(0,0)
-branch(20,15)
+branch(30,0)
+branch(60,0)
 
 # LEAF(0,0,3)
 #
