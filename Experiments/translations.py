@@ -2,13 +2,9 @@ import rhinoscriptsyntax as rs
 import random
 import math
 
-# objs = rs.GetObjects("Select objects to copy")
-# if objs:
-#     xform = rs.XformTranslation([10,10,0])
-#     rs.TransformObjects( objs, xform, True )
-
-mirrrred = rs.GetObjects("Select objects to mirror")
-if mirrrred:
-    plane = rs.ViewCPlane()
-    xform = rs.XformMirror(plane.Origin, plane.Normal)
-    rs.TransformObjects( mirrrred, xform, True )
+obj = rs.GetObject("Select object to mirror")
+if obj:
+    start = rs.GetPoint("Start of mirror plane")
+    end = rs.GetPoint("End of mirror plane")
+    if start and end:
+        rs.MirrorObject( obj, start, end, True )
